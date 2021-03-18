@@ -11,8 +11,8 @@ public class Calculator {
         else{
             String[] numberSplit = inputString.split(",|\n");
             int sum = 0;
-            for(int i = 0; i < numberSplit.length; i++){
-                sum += convertStringToInteger(numberSplit[i]);
+            for(String addMe: numberSplit){
+                sum += convertStringToInteger(addMe);
             }
             return sum;
         }
