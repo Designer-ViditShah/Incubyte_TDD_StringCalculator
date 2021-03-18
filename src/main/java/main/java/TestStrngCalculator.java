@@ -1,6 +1,10 @@
 package main.java;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.util.Calendar;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestStrngCalculator {
 
@@ -14,7 +18,6 @@ public class TestStrngCalculator {
         assertEquals(Calculator.Add("1"),1);
     }
 
-
     @Test
     public void returnsSumOfTwoNumbersCommaSeperated(){
         assertEquals(Calculator.Add("1,2"),3);
@@ -25,4 +28,17 @@ public class TestStrngCalculator {
         assertEquals(Calculator.Add("1\n2"),3);
     }
 
+    @Test
+    public void returnsSumOfMultipleNumbersWhichHasCustomDelimiterSeperated(){
+        assertEquals(Calculator.Add("//;\n1;2"),3);
+    }
+
+    @Test
+    public void forNegativeNumberThrowException() throws Exception{
+        negativeValueException();
+    }
+
+    private static void negativeValueException() throws IOException{
+        Calculator.Add("-1");
+    }
 }
