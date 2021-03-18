@@ -21,7 +21,9 @@ public class Calculator {
             String[] numberSplit = inputString.split(deliminators);
             int sum = 0;
             for (String addMe : numberSplit) {
-                sum += convertStringToInteger(addMe.trim());
+                if(convertStringToInteger(addMe)<=1000) {
+                    sum += convertStringToInteger(addMe);
+                }
             }
             return sum;
         }

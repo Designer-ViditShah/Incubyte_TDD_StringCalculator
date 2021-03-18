@@ -34,11 +34,9 @@ public class TestStrngCalculator {
     }
 
     @Test
-    public void forNegativeNumberThrowException() throws Exception{
-        negativeValueException();
+    public void ignoreIfNumberIsGreaterThan1000(){
+        assertEquals(Calculator.Add("2,1001"),2);
     }
 
-    private static void negativeValueException() throws IOException{
-        Calculator.Add("-1");
-    }
+
 }
