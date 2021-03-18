@@ -9,9 +9,17 @@ public class Calculator {
             return Integer.parseInt(inputString);
         }
         else{
-
-            return 0;
+            String[] numberSplit = inputString.split(",|\n");
+            int sum = 0;
+            for(int i = 0; i < numberSplit.length; i++){
+                sum += convertStringToInteger(numberSplit[i]);
+            }
+            return sum;
         }
+    }
+
+    private static int convertStringToInteger(String convertMeToInt) {
+        return Integer.parseInt(convertMeToInt);
     }
 
     private static boolean checkIfStringEmpty(String inputString) {
