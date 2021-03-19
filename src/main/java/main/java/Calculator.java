@@ -53,7 +53,14 @@ Few dangling characters are * [ \ etc.
             return convertStringToInteger(inputString);
         }
         else{
-            return AddHelper(inputString,deliminators);
+            if(inputString.startsWith("//")){
+                String allDelimiter = inputString.substring(2,inputString.indexOf("\n"));
+                String customDelimiterStringNumbers = inputString.substring(inputString.indexOf("\n")+1);
+                return AddHelper(customDelimiterStringNumbers,allDelimiter);
+            }
+            else{
+                return AddHelper(inputString,deliminators);
+            }
         }
     }
 
