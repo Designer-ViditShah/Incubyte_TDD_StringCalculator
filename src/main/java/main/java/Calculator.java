@@ -1,14 +1,11 @@
 package main.java;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
 import static java.util.Arrays.asList;
-
 public class Calculator {
-/*
+    /*
 countAddMethodCalls -> used to count number of times Add() function is called
 deliminators        -> used as basic delimiter in case of string does not start with //
 START_INDEX_OFFSET  -> In case the string starts with //[ so custom delimiter will always start from 3 index
@@ -22,7 +19,7 @@ Few dangling characters are * [ \ etc.
     private static Pattern customDelimitersValidator = Pattern.compile("//(\\[(\\D+)])+\n.*");
     private static Matcher customDelimitersMatcher;
     private static int startIndex;
-/*
+    /*
     Add function is called with string as an argument
     Since incorrect argument's have been already dealt as mentioned in the question
     Add function will throw an exception only in case of negative values
@@ -61,22 +58,15 @@ Few dangling characters are * [ \ etc.
                     checkForNegativeNumbers(numberList);
                     return sumArray(numberList);
                 }
-                else {
-
-                    return AddHelper(customDelimiterStringNumbers,allDelimiter);
-                }
-
+                else {return AddHelper(customDelimiterStringNumbers,allDelimiter);}
             }
-            else{
-                return AddHelper(inputString,deliminators);
-            }
+            else{ return AddHelper(inputString,deliminators); }
         }
     }
-
     private static boolean checkIfStringEmpty(String inputString) {
         return inputString.isEmpty();
     }
-/*
+    /*
     convertStringToInteger method simply converts the string value to integer value
     note: testcase have been made such that the string will only contain "0" to "9" in any order
  */
@@ -90,18 +80,14 @@ Few dangling characters are * [ \ etc.
             delimiters = ",|\n";
         String[] arrayString = customDelimiterStringNumbers.split(delimiters);
         for(String number : arrayString){
-            if(convertStringToInteger(number)<=1000 && convertStringToInteger(number) >= 0) {
+            if(convertStringToInteger(number)<=1000 && convertStringToInteger(number) >= 0)
                 ans += Integer.parseInt(number);
-            }else if (convertStringToInteger(number)<0){
-                listOfNegativeNumbers += number + " ";
-            }
+            else if (convertStringToInteger(number)<0) listOfNegativeNumbers += number + " ";
         }
-        if(listOfNegativeNumbers.length()>0){
-            throw new IllegalArgumentException("negative not allowed "+listOfNegativeNumbers);
-        }
+        if(listOfNegativeNumbers.length()>0)
+            throw new IllegalArgumentException("negative not allowed " + listOfNegativeNumbers);
         return ans;
     }
-
     private static List<String> getNumbersFromDelimiters(String string, String numberString) {
         String delimiters = ",|\n";
         if (canTheseMatchWithTheRegexPattern(string)) {
@@ -118,7 +104,6 @@ Few dangling characters are * [ \ etc.
         }
         return asList(numberString.split(delimiters));
     }
-
     /*
         Sum of the array can be done in two ways
         For case 1
@@ -159,9 +144,5 @@ Few dangling characters are * [ \ etc.
         }
     }
     // This method is called to count number of times the add function has been called
-    private static int GetCalledCount() {
-        return countAddMethodCalls;
-    }
-
-
+    private static int GetCalledCount() { return countAddMethodCalls; }
 }
