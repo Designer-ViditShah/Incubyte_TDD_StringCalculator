@@ -2,6 +2,7 @@ package main.java;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestStrngCalculator {
 
@@ -47,4 +48,11 @@ public class TestStrngCalculator {
         assertEquals(Calculator.Add("//[***][$$$][%][;]\n1***2$$$3%4;5"),15);
     }
 
+    @Test
+    public void ReturnExceptionIfNegativeNumberIsEncountered() throws Exception{
+//        assertEquals(Calculator.Add("-1"),throw new IllegalArgumentException("negative not allowed"));
+        assertThrows(IllegalArgumentException.class,() -> {
+            Calculator.Add("-1");
+        },"negative not allowed");
+    }
 }

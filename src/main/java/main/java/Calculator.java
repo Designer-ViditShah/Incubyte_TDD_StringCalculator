@@ -58,7 +58,7 @@ Few dangling characters are * [ \ etc.
                 String customDelimiterStringNumbers = inputString.substring(inputString.indexOf("\n")+1);
                 if(allDelimiter.startsWith("[")){
                     List<String> numberList = getNumbersFromDelimiters(inputString,customDelimiterStringNumbers);
-//                    checkForNegativeNumbers(numberList);
+                    checkForNegativeNumbers(numberList);
                     return sumArray(numberList);
                 }
                 else {
@@ -133,8 +133,35 @@ Few dangling characters are * [ \ etc.
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
+    /*
+    canTheseMatchWithTheRegexPattern method
+        returns true if the delimiter string matches the Pattern regex string mentioned above
+        returns false if the delimiter string does not matches the Pattern regex string mentioned above
+ */
     private static boolean canTheseMatchWithTheRegexPattern(String string) {
         customDelimitersMatcher = customDelimitersValidator.matcher(string);
         return customDelimitersMatcher.matches();
     }
+    /*
+    Negative values are handled in two ways
+    For case if string delimiter starts with [
+        This method includes the concept to filter out the List using filter and map function for the negative values
+    For case if string delimiter does not starts with [
+        This method simply traverse the numbers after splitting and add the number to the stringNegativeFound
+    Note that in both the case all the negative values have been printed
+ */
+    private static void checkForNegativeNumbers(List<String> numbersList) {
+        String negatives = numbersList.stream()
+                .filter(s -> s.contains("-"))
+                .collect(Collectors.joining(","));
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
+        }
+    }
+    // This method is called to count number of times the add function has been called
+    private static int GetCalledCount() {
+        return countAddMethodCalls;
+    }
+
+
 }
