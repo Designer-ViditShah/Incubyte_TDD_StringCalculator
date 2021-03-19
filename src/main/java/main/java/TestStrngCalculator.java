@@ -1,9 +1,7 @@
 package main.java;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestStrngCalculator {
 
@@ -36,6 +34,17 @@ public class TestStrngCalculator {
     @Test
     public void ignoreIfNumberIsGreaterThan1000() throws Exception {
         assertEquals(Calculator.Add("2,1001"),2);
+    }
+
+    @Test
+    public void checkForSingleDelimiterDynamicSize() throws Exception {
+        assertEquals(Calculator.Add("//[***]\n1***2***3"),6);
+        assertEquals(Calculator.Add("//[ddd]\n1ddd2ddd3"),6);
+    }
+
+    @Test
+    public void checkForMultipleDelimiterDynamicSize() throws Exception {
+        assertEquals(Calculator.Add("//[***][$$$][%][;]\n1***2$$$3%4;5"),15);
     }
 
 }

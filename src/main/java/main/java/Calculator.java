@@ -56,7 +56,16 @@ Few dangling characters are * [ \ etc.
             if(inputString.startsWith("//")){
                 String allDelimiter = inputString.substring(2,inputString.indexOf("\n"));
                 String customDelimiterStringNumbers = inputString.substring(inputString.indexOf("\n")+1);
-                return AddHelper(customDelimiterStringNumbers,allDelimiter);
+                if(allDelimiter.startsWith("[")){
+                    List<String> numberList = getNumbersFromDelimiters(inputString,customDelimiterStringNumbers);
+//                    checkForNegativeNumbers(numberList);
+                    return sumArray(numberList);
+                }
+                else {
+
+                    return AddHelper(customDelimiterStringNumbers,allDelimiter);
+                }
+
             }
             else{
                 return AddHelper(inputString,deliminators);
@@ -93,5 +102,39 @@ Few dangling characters are * [ \ etc.
         return ans;
     }
 
+    private static List<String> getNumbersFromDelimiters(String string, String numberString) {
+        String delimiters = ",|\n";
+        if (canTheseMatchWithTheRegexPattern(string)) {
+            String customDelimiters = customDelimitersMatcher.group(1);
+//            System.out.println("CustomDelimiters "+customDelimiters);
+            startIndex = customDelimiters.length() + START_INDEX_OFFSET;
+            String convertToRegExFormat = customDelimiters.replaceFirst("\\[", "")
+                    .replaceAll("\\[", "|")
+                    .replaceAll("]", "");
+            delimiters += "|" + Pattern.compile("\\|").
+                    splitAsStream(convertToRegExFormat).
+                    map(Pattern::quote).
+                    collect(Collectors.joining("|"));
+        }
+        return asList(numberString.split(delimiters));
+    }
 
+    /*
+        Sum of the array can be done in two ways
+        For case 1
+            This method includes the concept to sum values in the List using filter and map function and sum function
+        For case 2
+            This method simply traverse the numbers and add them into a variable and return that variable
+        Note that in both the case sum will be printed
+    */
+    private static int sumArray(List<String> numbersList) {
+        return numbersList.stream()
+                .filter(s -> Integer.parseInt(s) <= 1000)
+                .mapToInt(Integer::parseInt)
+                .sum();
+    }
+    private static boolean canTheseMatchWithTheRegexPattern(String string) {
+        customDelimitersMatcher = customDelimitersValidator.matcher(string);
+        return customDelimitersMatcher.matches();
+    }
 }
