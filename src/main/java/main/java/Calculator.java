@@ -8,7 +8,6 @@ public class Calculator {
     /*
 countAddMethodCalls -> used to count number of times Add() function is called
 deliminators        -> used as basic delimiter in case of string does not start with //
-START_INDEX_OFFSET  -> In case the string starts with //[ so custom delimiter will always start from 3 index
 Pattern and Matcher helps to deal with the escape and the dangling characters that are used in the regular expression
 Few dangling characters are * [ \ etc.
  */
