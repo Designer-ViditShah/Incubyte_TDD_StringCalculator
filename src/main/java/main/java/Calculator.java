@@ -9,16 +9,14 @@ public class Calculator {
 countAddMethodCalls -> used to count number of times Add() function is called
 deliminators        -> used as basic delimiter in case of string does not start with //
 START_INDEX_OFFSET  -> In case the string starts with //[ so custom delimiter will always start from 3 index
-startIndex          -> it gets updated for each [delimiter] in the string
 Pattern and Matcher helps to deal with the escape and the dangling characters that are used in the regular expression
 Few dangling characters are * [ \ etc.
  */
     private static int countAddMethodCalls = 0;
     private static String deliminators = ",|\\n";
-    public static final int START_INDEX_OFFSET = 3;
     private static Pattern customDelimitersValidator = Pattern.compile("//(\\[(\\D+)])+\n.*");
     private static Matcher customDelimitersMatcher;
-    private static int startIndex;
+
     /*
     Add function is called with string as an argument
     Since incorrect argument's have been already dealt as mentioned in the question
@@ -93,7 +91,7 @@ Few dangling characters are * [ \ etc.
         if (canTheseMatchWithTheRegexPattern(string)) {
             String customDelimiters = customDelimitersMatcher.group(1);
 //            System.out.println("CustomDelimiters "+customDelimiters);
-            startIndex = customDelimiters.length() + START_INDEX_OFFSET;
+
             String convertToRegExFormat = customDelimiters.replaceFirst("\\[", "")
                     .replaceAll("\\[", "|")
                     .replaceAll("]", "");
